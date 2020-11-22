@@ -7,6 +7,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Arrays;
 
+/**
+ * InputStream and OutputStreams provides the basic interface for i/o
+ * Based on type of sink, there are different implementations like
+ * FileInputStream, TelnetInputStream etc..
+ */
 public class Streams {
     public static void writeToTemp(byte[] bytes)  {
         // Try with resources will automatically close the output (Autocloseable)
