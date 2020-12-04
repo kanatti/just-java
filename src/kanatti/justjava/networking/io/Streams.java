@@ -1,4 +1,4 @@
-package kanatti.justjava.networking;
+package kanatti.justjava.networking.io;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -13,9 +13,16 @@ import java.util.Arrays;
  * FileInputStream, TelnetInputStream etc..
  */
 public class Streams {
-    public static void writeToTemp(byte[] bytes)  {
+    public static void writeToTemp(String data, String filename) {
+        writeToTemp(data.getBytes(), filename);
+    }
+    public static void writeToTemp(byte[] bytes) {
+        writeToTemp(bytes, "/tmp/data.txt");
+    }
+
+    public static void writeToTemp(byte[] bytes, String filename)  {
         // Try with resources will automatically close the output (Autocloseable)
-        try (OutputStream out = new FileOutputStream("/tmp/data.txt")) {
+        try (OutputStream out = new FileOutputStream(filename)) {
             out.write(bytes);
             out.flush(); // Output Streams can be buffered so always flush them
         } catch (IOException ex) {
@@ -25,7 +32,7 @@ public class Streams {
         // Manually handling the closing without try resource
         OutputStream out = null;
         try {
-            out = new FileOutputStream("/tmp/data.txt");
+            out = new FileOutputStream(filename);
             out.write(bytes);
             out.flush();
         } catch (IOException ex) {
