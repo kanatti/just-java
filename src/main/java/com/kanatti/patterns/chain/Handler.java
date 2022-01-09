@@ -3,12 +3,7 @@ package com.kanatti.patterns.chain;
 public abstract class Handler<T> {
     private Handler<T> next;
 
-    public Handler<T> withNext(Handler<T> next) {
-        this.next = next;
-        return next;
-    }
-
-    public void setNext(Handler<T> next) {
+    protected void setNext(Handler<T> next) {
         this.next = next;
     }
 
