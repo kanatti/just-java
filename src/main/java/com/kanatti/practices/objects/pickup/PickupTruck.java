@@ -1,4 +1,4 @@
-package kanatti.justjava.practices.objects.pickup;
+package com.kanatti.practices.objects.pickup;
 
 public interface PickupTruck {
     boolean deliver();

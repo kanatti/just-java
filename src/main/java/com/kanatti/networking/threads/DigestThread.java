@@ -1,8 +1,8 @@
-package kanatti.justjava.networking.threads;
+package com.kanatti.networking.threads;
 
 import java.util.List;
 
-import kanatti.justjava.networking.io.Streams;
+import com.kanatti.networking.io.Streams;
 
 import javax.xml.bind.DatatypeConverter;
 

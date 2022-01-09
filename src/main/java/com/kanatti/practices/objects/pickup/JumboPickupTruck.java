@@ -1,4 +1,4 @@
-package kanatti.justjava.practices.objects.pickup;
+package com.kanatti.practices.objects.pickup;
 
 class JumboPickupTruck implements PickupTruck{
     private String message = "yet to deliver";

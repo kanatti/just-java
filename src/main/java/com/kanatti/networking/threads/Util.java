@@ -1,4 +1,4 @@
-package kanatti.justjava.networking.threads;
+package com.kanatti.networking.threads;
 
 import java.io.FileInputStream;
 import java.io.IOException;

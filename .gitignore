@@ -5,3 +5,6 @@ build/
 build.properties
 .gradle
 .DS_Store
+.vscode
+target/
+

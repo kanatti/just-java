@@ -1,4 +1,4 @@
-package kanatti.justjava.practices.objects.pickup;
+package com.kanatti.practices.objects.pickup;
 
 public class Pickup {
     private Pickup() {}

@@ -1,7 +1,7 @@
-package kanatti.justjava.practices.objects;
+package com.kanatti.practices.objects;
 
-import kanatti.justjava.practices.objects.pickup.Pickup;
-import kanatti.justjava.practices.objects.pickup.PickupTruck;
+import com.kanatti.practices.objects.pickup.Pickup;
+import com.kanatti.practices.objects.pickup.PickupTruck;
 
 
 public class StaticFactory {

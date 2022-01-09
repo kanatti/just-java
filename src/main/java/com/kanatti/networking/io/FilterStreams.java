@@ -1,4 +1,4 @@
-package kanatti.justjava.networking.io;
+package com.kanatti.networking.io;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;

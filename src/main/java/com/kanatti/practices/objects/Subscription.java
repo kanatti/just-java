@@ -1,4 +1,4 @@
-package kanatti.justjava.practices.objects;
+package com.kanatti.practices.objects;
 
 public class Subscription {
     private final SubscriptionType subscriptionType;
