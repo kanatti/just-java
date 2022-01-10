@@ -7,7 +7,7 @@ import com.kanatti.patterns.abstractfactory.filesystem.FileSystem;
 
 public class AbstractFactoryClient {
     /**
-     * BuildFactory provides factory of different flavors MAC, WINDOWS, LINUX. 
+     * BuildFactory provides factory of different flavors MAC, WINDOWS, LINUX.
      * Factory provides the necessary abstractions to create an executable without
      * worrying about the underlying Arch.
      */

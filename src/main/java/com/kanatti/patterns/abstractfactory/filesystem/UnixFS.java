@@ -12,5 +12,5 @@ public class UnixFS extends FileSystem {
     public void write(String filename, byte[] bytes) {
         System.out.printf("Writing to %s bytes on Unix\n", filename);
     }
-    
+
 }

@@ -10,7 +10,7 @@ public class WindowFS extends FileSystem {
 
     @Override
     public void write(String filename, byte[] bytes) {
-       System.out.printf("Writing to %s on Windows\n", filename);
+        System.out.printf("Writing to %s on Windows\n", filename);
     }
-    
+
 }
