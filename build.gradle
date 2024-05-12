@@ -5,6 +5,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'antlr'
 }
 
 repositories {
@@ -19,6 +20,7 @@ dependencies {
     implementation 'org.hibernate:hibernate-validator:5.1.3.Final'
     implementation 'javax.el:javax.el-api:2.2.4'
     implementation 'org.glassfish.web:javax.el:2.2.4'
+    antlr "org.antlr:antlr4:4.7.1"
     testImplementation 'junit:junit:4.11'
 }
 
@@ -26,6 +28,9 @@ group = 'com.kanatti'
 version = '1.0-SNAPSHOT'
 description = 'justjava'
 java.sourceCompatibility = JavaVersion.VERSION_1_8
+
+sourceSets.main.antlr.srcDirs = ['src/main/antlr']
+
 
 publishing {
     publications {
@@ -55,4 +60,15 @@ test {
 
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
+}
+
+// Define a custom task to run a specific main class
+task runMain(type: JavaExec) {
+    group = 'Execution'
+    description = 'Runs the specified main class'
+
+    if (project.hasProperty('mainClass')) {
+        main = project.getProperty('mainClass')
+        classpath = sourceSets.main.runtimeClasspath
+    }
 }

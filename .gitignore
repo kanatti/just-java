@@ -7,6 +7,4 @@ build.properties
 .DS_Store
 .vscode
 target/
-gradlew
-gradlew.bat
 gradle/
