@@ -1,0 +1,16 @@
+[
+    {
+      "type": "element",
+      "children": [
+        {
+          "type": "text",
+          "text": "Some random text"
+        }
+      ]
+    },
+    {
+      "type": "element",
+      "url": "https://image.com",
+      "children": []
+    }
+  ]

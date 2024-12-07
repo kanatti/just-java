@@ -1,0 +1,46 @@
+[
+    {
+        "operator": "OR",
+        "filters": [
+            {
+                "operator": "EQ",
+                "column": "name",
+                "value": "John"
+            },
+            {
+                "operator": "IN",
+                "column": "age",
+                "values": [
+                    20,
+                    30
+                ]
+            }
+        ]
+    },
+    {
+        "operator": "IN",
+        "column": "name",
+        "values": [
+            "John",
+            "Jane"
+        ]
+    },
+    {
+        "operator": "AND",
+        "filters": [
+            {
+                "operator": "IN",
+                "column": "name",
+                "values": [
+                    "John",
+                    "Jane"
+                ]
+            },
+            {
+                "operator": "NOT_EQ",
+                "column": "age",
+                "value": 10
+            }
+        ]
+    }
+]

@@ -1,5 +1,8 @@
 package com.kanatti.practices.objects;
 
+/**
+ * Test Class
+ */
 public class Subscription {
     private final SubscriptionType subscriptionType;
 
