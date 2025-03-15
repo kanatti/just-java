@@ -1,0 +1,259 @@
+@es = http://localhost:19200
+@os = http://localhost:29200
+@header_auth = Authorization: Bearer kanatti
+@header_json = Content-Type: application/json
+
+
+GET {{es}}
+{{header_json}}
+
+
+### 
+
+GET {{os}}
+{{header_json}}
+
+
+
+### create a local snapshot repository
+
+PUT {{es}}/_snapshot/rfs_snapshot
+{{header_json}}
+
+{
+  "type": "fs",
+  "settings": {
+    "location": "/snapshots"
+  }
+}
+
+### show snapshot repositories
+ 
+GET {{es}}/_snapshot
+{{header_json}}
+
+
+### show snapshots
+ 
+GET {{es}}/_cat/snapshots/rfs_snapshot
+{{header_json}}
+
+### Delete a snapshot
+
+DELETE {{es}}/_snapshot/rfs_snapshot/snapshot_2
+{{header_json}}
+
+### Delete a repo
+
+DELETE {{es}}/_snapshot/rfs_snapshot
+{{header_json}}
+
+### Delete indices
+
+DELETE {{es}}/test-*
+{{header_json}}
+
+### Setup index template 
+
+PUT {{es}}/_template/template_1
+{{header_json}}
+
+{
+  "index_patterns": ["test-index"],
+  "settings": {
+    "number_of_shards": 3
+  }
+}
+
+### Change refresh interval
+
+PUT {{es}}/test-index/_settings
+{{header_json}}
+
+{
+  "index" : {
+    "refresh_interval" : "100s"
+  }
+}
+
+### Index a few docs
+
+POST {{es}}/test-index/_doc/doc1?routing=user-1
+{{header_json}}
+
+{
+    "name": "test-doc-1",
+    "user": "user-11"
+}
+
+### Search docs on ES
+
+GET {{es}}/test-index/_search?explain=true
+{{header_json}} 
+
+### Cat 
+
+GET {{es}}/_cat/indices?v
+{{header_json}}
+
+### 
+GET {{es}}/_cat/shards/test-index?v&s=prirep,shard
+{{header_json}}
+
+### 
+GET {{es}}/_cat/segments/test-index?v
+{{header_json}}
+
+### 
+
+POST {{es}}/test-index/_doc/doc2?routing=user-1
+{{header_json}}
+
+{
+    "name": "test-doc-2",
+    "user": "user-1"
+}
+
+
+### 
+
+POST {{es}}/test-index/_doc/doc3?routing=user-2
+{{header_json}}
+
+{
+    "name": "test-doc-3",
+    "user": "user-2"
+}
+
+###
+
+POST {{es}}/test-index/_doc/doc4
+{{header_json}}
+
+{
+    "name": "test-doc-4",
+    "user": "user-4"
+}
+
+### Show shards
+
+GET {{es}}/_cat/shards?v&s=prirep,shard
+{{header_json}}
+
+### Show segments
+
+GET {{es}}/_cat/segments?v
+{{header_json}}
+
+### Show indices
+
+GET {{es}}/_cat/indices?v&s=i
+{{header_json}}
+
+
+
+###  Force merge
+POST {{es}}/test-index/_forcemerge
+{{header_json}}
+
+
+### Search docs
+
+GET {{es}}/test-index/_search?explain=true
+{{header_json}} 
+
+### By routing
+
+GET {{es}}/test-index/_search?explain=true&routing=user-1
+{{header_json}} 
+
+### By routing and query
+
+GET {{es}}/test-index/_search?routing=user-1&q=user:1
+{{header_json}}
+
+
+###
+
+GET {{os}}/test-index/_search?routing=user-1&q=user:1
+{{header_json}}
+
+
+
+
+### Trigger a snapshot
+PUT {{es}}/_snapshot/rfs_snapshot/snapshot_2
+{{header_json}}
+
+{
+    "indices": "test-index",
+    "ignore_unavailable": true,
+    "include_global_state": true
+}
+
+### Setup index template on OS
+
+PUT {{os}}/_template/template_1
+{{header_json}}
+
+{
+  "index_patterns": ["test-index"],
+  "settings": {
+    "number_of_shards": 3
+  }
+}
+
+
+### Search docs on OS
+
+GET {{os}}/test-index/_search?explain=true
+{{header_json}} 
+
+### By routing
+
+GET {{os}}/test-index/_search?explain=true&routing=user-1
+{{header_json}} 
+
+
+
+### State of migration on OS
+
+GET {{os}}/.migrations_working_state/_search
+
+
+
+### --- Cleanup ---
+
+### DELETE Working state
+DELETE {{os}}/.migrations_working_state
+
+### DELETE OS index
+DELETE {{os}}/test-index
+
+### DELETE Snapshot
+
+DELETE {{es}}/_snapshot/rfs_snapshot/snapshot_1
+{{header_json}}
+
+
+### DELETE ES index
+DELETE {{es}}/test-index
+
+
+
+
+
+### Bulk API testing
+
+
+POST {{es}}/_bulk
+Content-Type: application/x-ndjson
+
+{ "index" : { "_index" : "test-index", "_type": "_doc", "_id" : "10" } }
+{ "name": "test-doc-3", "user": "user-2" }
+{ "index" : { "_index" : "test-index", "_type": "_doc", "_id" : "21", "routing": "1" } }
+{ "name": "test-doc-3", "user": "user-2" }
+
+###
+
+DELETE {{os}}/test
