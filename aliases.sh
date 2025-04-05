@@ -5,9 +5,9 @@ alias run-netty-client="gw runMain -PmainClass=com.kanatti.netty.EchoClientApp"
 
 function gw-run() {
   if [ -z "$1" ]; then
-    echo "Usage: gw-run <MainClassSuffix>"
+    echo "Usage: gw-run <classpath>"
     return 1
   fi
 
-  gw --warning-mode=none runMain -PmainClass=com.kanatti."$1"
+  gw --warning-mode=none runMain -PmainClass="$1"
 }
