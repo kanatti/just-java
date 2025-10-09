@@ -34,8 +34,8 @@ dependencies {
     testImplementation 'junit:junit:4.11'
 
     // Lombok
-    compileOnly 'org.projectlombok:lombok:1.18.30'
-    annotationProcessor 'org.projectlombok:lombok:1.18.30'
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
 
     // lucene
     implementation 'org.apache.lucene:lucene-core:7.7.3'
@@ -50,7 +50,8 @@ dependencies {
 group = 'com.kanatti'
 version = '1.0-SNAPSHOT'
 description = 'justjava'
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_21
+java.targetCompatibility = JavaVersion.VERSION_21
 
 sourceSets.main.antlr.srcDirs = ['src/main/antlr']
 
@@ -63,13 +64,28 @@ publishing {
     }
 }
 
-java {
-    sourceSets {
-        main {
-            annotationProcessorPath = configurations.annotationProcessor
-        }
+sourceSets {
+    mapOfEntries {
+        java.srcDir 'src/mapOfEntries/java'
+    }
+    putMethod {
+        java.srcDir 'src/putMethod/java'
     }
 }
+
+task compileMapOfEntries(type: JavaCompile) {
+    source = sourceSets.mapOfEntries.java
+    classpath = configurations.compileClasspath
+    destinationDirectory = file("$buildDir/classes/mapOfEntries")
+}
+
+task compilePutMethod(type: JavaCompile) {
+    source = sourceSets.putMethod.java
+    classpath = configurations.compileClasspath
+    destinationDirectory = file("$buildDir/classes/putMethod")
+}
+
+
 
 
 test {
@@ -100,7 +116,7 @@ task runMain(type: JavaExec) {
     description = 'Runs the specified main class'
 
     if (project.hasProperty('mainClass')) {
-        main = project.getProperty('mainClass')
+        mainClass = project.getProperty('mainClass')
         classpath = sourceSets.main.runtimeClasspath
     }
 }
