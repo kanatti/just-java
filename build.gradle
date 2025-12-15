@@ -55,6 +55,10 @@ java.targetCompatibility = JavaVersion.VERSION_21
 
 sourceSets.main.antlr.srcDirs = ['src/main/antlr']
 
+generateGrammarSource {
+    arguments += ['-visitor']
+}
+
 
 publishing {
     publications {
