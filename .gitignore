@@ -9,3 +9,9 @@ build.properties
 target/
 gradle/
 bin/
+
+# Eclipse
+.classpath
+.factorypath
+.project
+.settings/

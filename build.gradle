@@ -10,7 +10,7 @@ plugins {
 }
 
 application {
-    mainClass = 'com.kanatti.jackson.Test2'
+    mainClass.set('com.kanatti.jackson.Test2')
 }
 
 repositories {
@@ -41,10 +41,12 @@ dependencies {
     implementation 'org.apache.lucene:lucene-core:7.7.3'
     implementation 'org.apache.lucene:lucene-analyzers-common:7.7.3'
 
-    // SLF4J API
-    implementation 'org.slf4j:slf4j-api:1.7.30'
-    // Logback binding for SLF4J
-    implementation 'ch.qos.logback:logback-classic:1.2.3'
+    // SLF4J 2.x with Logback (compatible with Arrow 18.3.0)
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+
+    // Apache Arrow (upgraded for RunEndEncodedVector support)
+    implementation 'org.apache.arrow:arrow-vector:18.3.0'
+    implementation 'org.apache.arrow:arrow-memory-netty:18.3.0'
 }
 
 group = 'com.kanatti'
@@ -120,7 +122,10 @@ task runMain(type: JavaExec) {
     description = 'Runs the specified main class'
 
     if (project.hasProperty('mainClass')) {
-        mainClass = project.getProperty('mainClass')
+        mainClass.set(project.getProperty('mainClass'))
         classpath = sourceSets.main.runtimeClasspath
     }
+
+    // Required JVM arguments for Apache Arrow
+    jvmArgs = ['--add-opens=java.base/java.nio=ALL-UNNAMED']
 }
